@@ -1,3 +1,3 @@
 export const App = () => (
-    <p>test</p>
+    <p className="text-blue-600">test</p>
 )
