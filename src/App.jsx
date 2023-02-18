@@ -1,3 +1,10 @@
+import { GameContext } from "./context.js"
+import { Map } from "./Map.jsx"
+
 export const App = () => (
-    <p className="text-blue-600">test</p>
+    <GameContext.Provider value={{
+        completedCountries: ["US", "RU", "CN", "CD", "FR"]
+    }}>
+        <Map />
+    </GameContext.Provider>
 )
