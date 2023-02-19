@@ -1,10 +1,29 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { GameContext } from "./context.js"
 import { Map } from "./Map.jsx"
 import names from "./names.json"
 
 export const App = () => {
     const [completedCountries, setCompletedCountries] = useState([])
+    const max = 197
+
+    const [countdown, setCountdown] = useState(15 * 60)
+    const [started, setStarted] = useState(false)
+    const [ended, setEnded] = useState(false)
+    useEffect(() => {
+        if (started && !ended) {
+            const interval = setInterval(() => {
+                setCountdown(t => {
+                    if (t <= 1) {
+                        clearInterval(interval)
+                        setEnded(true)
+                    }
+                    return t - 1
+                })
+            }, 1000)
+            return () => clearInterval(interval)
+        }
+    }, [started, ended])
 
     const onInput = e => {
         const value = e.target.value.toLowerCase().trim()
@@ -12,25 +31,27 @@ export const App = () => {
         if (code && !completedCountries.includes(code)) {
             setCompletedCountries([...completedCountries, code])
             e.target.value = ""
+            if (completedCountries.length + 1 >= max) setEnded(true)
         }
+        if (!started) setStarted(true)
     }
-
-    const [timeRemaining, setTimeRemaining] = useState(15 * 60)
 
     return (
         <GameContext.Provider value={{ completedCountries }}>
             <div className="max-w-7xl mx-auto text-4xl px-8">
-                <div className="flex flex-grow justify-between mt-12 mb-4">
-                    <p className="w-48 text-neutral-400">{formatTime(timeRemaining)}</p>
+                <div className="flex flex-grow justify-between mt-12 h-16">
+                    <p className="w-48 text-neutral-400">{formatTime(countdown)}</p>
 
-                    <input
-                        autoFocus={true}
-                        className="bg-transparent outline-none text-white text-center placeholder-neutral-600"
-                        onInput={onInput}
-                        placeholder="Type here"
-                    />
+                    {!ended && (
+                        <input
+                            autoFocus={true}
+                            className="bg-transparent outline-none text-white text-center placeholder-neutral-600"
+                            onInput={onInput}
+                            placeholder="Type here"
+                        />
+                    )}
 
-                    <p className="w-48 text-neutral-400 text-right"><span className="text-white">{completedCountries.length}</span> / 197</p>
+                    <p className="w-48 text-neutral-400 text-right"><span className="text-white">{completedCountries.length}</span> / {max}</p>
                 </div>
 
                 <Map />
