@@ -1,4 +1,4 @@
-# Map Game
+# countries.lol
 I've been playing Sporcle's ["Countries of the World" game](https://www.sporcle.com/games/g/world) a lot recently, but the website is meh, so I made a better version, with a design inspired by [Monkeytype](https://monkeytype.com).
 It's a pretty simple site - no ads or trackers or cookie banners, just a static react app.
 
