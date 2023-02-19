@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { GameContext } from "./context.js"
 import { Map } from "./Map.jsx"
 import names from "./names.json"
+import ConfettiExplosion from "react-confetti-explosion"
 
 export const App = () => {
     const [completedCountries, setCompletedCountries] = useState([])
@@ -42,13 +43,15 @@ export const App = () => {
                 <div className="flex flex-grow justify-between mt-12 h-16">
                     <p className="w-48 text-neutral-400">{formatTime(countdown)}</p>
 
-                    {!ended && (
+                    {!ended ? (
                         <input
                             autoFocus={true}
                             className="bg-transparent outline-none text-white text-center placeholder-neutral-600"
                             onInput={onInput}
                             placeholder="Type here"
                         />
+                    ) : completedCountries.length >= max && (
+                        <ConfettiExplosion />
                     )}
 
                     <p className="w-48 text-neutral-400 text-right"><span className="text-white">{completedCountries.length}</span> / {max}</p>
