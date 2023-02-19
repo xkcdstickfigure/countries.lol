@@ -1,8 +1,9 @@
 import { useContext } from "react"
 import { GameContext } from "./context.js"
+import classNames from "classnames"
 
 export const Map = () => (
-    <svg width="1408" height="653" viewBox="0 0 1408 653" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className="w-full" viewBox="0 0 1408 653" fill="none" xmlns="http://www.w3.org/2000/svg">
         <Country id="IS" d="M534.5 47L538.5 55L526 64H506L497.5 53L507.5 47L522.5 48.5L534.5 47Z" fill="#D9D9D9" />
         <Country id="CA" d="M82 77.5L130.5 33.5L271 4L371.5 38L368.5 114.5L325.5 131L267 152.5L216 131H93L82 77.5Z" fill="#D9D9D9" />
         <Country id="US-Alaska" d="M69.5 28L127.5 34L79 77L0.5 93L27 47.5L69.5 28Z" fill="#D9D9D9" />
@@ -215,6 +216,12 @@ const Country = ({ id, d }) => {
     const completed = completedCountries.includes(code)
 
     return (
-        <path d={d} fill={completed ? "#374151" : "#fbbf24"} />
+        <path
+            d={d}
+            className={classNames(
+                completed ? "fill-neutral-700" : "fill-amber-400",
+                "duration-100"
+            )}
+        />
     )
 }
