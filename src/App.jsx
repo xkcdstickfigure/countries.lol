@@ -4,11 +4,12 @@ import { Map } from "./Map.jsx"
 import names from "./names.json"
 import ConfettiExplosion from "react-confetti-explosion"
 
+const MAX_COUNTRIES = 197
+const TIME = 15 * 60
+
 export const App = () => {
     const [completedCountries, setCompletedCountries] = useState([])
-    const max = 197
-
-    const [countdown, setCountdown] = useState(15 * 60)
+    const [countdown, setCountdown] = useState(TIME)
     const [started, setStarted] = useState(false)
     const [ended, setEnded] = useState(false)
     useEffect(() => {
@@ -32,7 +33,7 @@ export const App = () => {
         if (code && !completedCountries.includes(code)) {
             setCompletedCountries([...completedCountries, code])
             e.target.value = ""
-            if (completedCountries.length + 1 >= max) setEnded(true)
+            if (completedCountries.length + 1 >= MAX_COUNTRIES) setEnded(true)
         }
         if (!started) setStarted(true)
     }
@@ -50,11 +51,11 @@ export const App = () => {
                             onInput={onInput}
                             placeholder="Type here"
                         />
-                    ) : completedCountries.length >= max && (
+                    ) : completedCountries.length >= MAX_COUNTRIES && (
                         <ConfettiExplosion />
                     )}
 
-                    <p className="w-48 text-neutral-400 text-right"><span className="text-white">{completedCountries.length}</span> / {max}</p>
+                    <p className="w-48 text-neutral-400 text-right"><span className="text-white">{completedCountries.length}</span> / {MAX_COUNTRIES}</p>
                 </div>
 
                 <Map />
