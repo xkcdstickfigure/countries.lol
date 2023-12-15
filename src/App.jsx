@@ -41,7 +41,7 @@ export const App = () => {
     return (
         <GameContext.Provider value={{ completedCountries }}>
             <div className="max-w-7xl mx-auto text-4xl px-8">
-                <div className="flex flex-grow justify-between mt-12 h-16">
+                <div className="flex flex-grow justify-between mt-12 mb-4">
                     <p className="w-48 text-neutral-400">{formatTime(countdown)}</p>
 
                     {!ended ? (
