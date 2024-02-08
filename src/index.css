@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: Robot-font;
+    src: url(../Assets/RobotoMono-VariableFont_wght.ttf);
+  }
+
+.mode-button{
+    position: relative;
+    width: 10%;
+    height: 2%;
+    top: 10px;
+    font-family: Robot-font;
+    padding: 5px;
+    font-size: x-large;
+    border-radius: 20px;
+    color: white;
+    font-weight: 900;
+    transition: 500ms linear;
+}
+
+.button-mode-Easy{
+    background-color: rgb(0, 255, 0);
+}
+
+.button-mode-Normal{
+    background-color: #fbbf24;
+}
